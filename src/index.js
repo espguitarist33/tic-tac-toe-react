@@ -1,10 +1,8 @@
-const react = require("react");
-
 import React from 'react';
-import reactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends react.Component {
+class Square extends React.Component {
     render() {
         return (
             <button className="square">
