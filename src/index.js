@@ -5,7 +5,7 @@ import './index.css';
 class Square extends React.Component {
     render() {
         return (
-            <button className="square">
+            <button className="square" onClick={() => { console.log('click'); }}>
                 {this.props.value}
             </button>
         );
@@ -28,7 +28,7 @@ class Board extends React.Component {
                     {this.renderSquare(1)}
                     {this.renderSquare(2)}
                 </div>
-                <div classname="board-row">
+                <div className="board-row">
                     {this.renderSquare(3)}
                     {this.renderSquare(4)}
                     {this.renderSquare(5)}
