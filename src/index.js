@@ -3,28 +3,46 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
-    constructor(props) {
-        // Obviously, we need to call the super here!
-        super(props);
-        this.state = {
-            value: null,
-        }
-    }
     render() {
         return (
             // Set State causes the class and all children to be re-rendered
-            <button className="square"
-            onClick={() => { this.setState({value: 'X'}) }}>
-                {this.state.value}
+            <button
+                className="square"
+                // Now we call the onClick method being passed in to us
+                onClick={() => this.props.onClick()}
+            >
+                {this.props.value}
             </button>
         );
     }
 }
 
 class Board extends React.Component {
+    constructor(props) {
+        // Let's start with an empty state for the whole board
+        super(props);
+        this.state = {
+            squares: Array(9).fill(null),
+        };
+    }
+
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i] = 'X';
+        // This re-renders all of them, wonder if that's even necessary at this point?
+        this.setState({squares: squares});
+    }
+    
     renderSquare(i) {
-        // The prop is passed via the JSX attributes
-        return <Square value={i}/>;
+        //Now we will tell the square it's state from our array. React calls the Squares as "controlled components"
+        // handleClick allows the state to be updated via call-back and keeps the components correctly encapsulated (like pub/sub)
+        return (
+            <Square
+                value={this.state.squares[i]}
+                // Note that this property name doesn't actually matter.. <button>'s implementation does, however.
+                onClick={() => this.handleClick(i)}
+            />
+        );
     }
 
     render() {
