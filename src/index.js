@@ -2,20 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component {
-    render() {
+function Square(props) {
+    // It is often easier and more readable to just use a function when there is no state
         return (
-            // Set State causes the class and all children to be re-rendered
             <button
                 className="square"
                 // Now we call the onClick method being passed in to us
-                onClick={() => this.props.onClick()}
+                onClick={props.onClick}
             >
-                {this.props.value}
+                {props.value}
             </button>
         );
     }
-}
 
 class Board extends React.Component {
     constructor(props) {
