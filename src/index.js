@@ -100,11 +100,16 @@ class Game extends React.Component {
             const desc = move ?
                 'Go to move #' + move :
                 'Go to game start';
+            
+            let moveData = `Move: ${Math.floor(step.lastMove/3) + 1},${(step.lastMove%3) + 1}`;
+            if (move == history.length -1 ) {
+                moveData = <b>{moveData}</b>
+            }
 
             return (
                 // We generally do not want to use indexes, as the list order can change. Here we do not change, so this is okay.
                 <li key={move}>
-                    <div>Move: {Math.floor(step.lastMove/3) + 1},{(step.lastMove%3) + 1}<button onClick={() => this.jumpTo(move)}>{desc}</button></div>
+                    <div>{moveData}<button onClick={() => this.jumpTo(move)}>{desc}</button></div>
                 </li>
             );
         });
