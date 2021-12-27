@@ -29,23 +29,20 @@ class Board extends React.Component {
     }
 
     render() {
+        const totalRows = 3;
+        const totalColumns = 3;
+        let rows = [];
+        let totalSquares = 8;
+        for (let i = 0; i < totalRows; i++){
+            let squares = [];
+            for (let k = 0; k < totalColumns; totalSquares--, k++) {
+                squares.push(this.renderSquare(totalSquares));
+            };
+            rows.push(<div className="board-row">{squares}</div>);
+        };
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {rows}
             </div>
         );
     }
@@ -102,7 +99,7 @@ class Game extends React.Component {
                 'Go to game start';
             
             let moveData = `Move: ${Math.floor(step.lastMove/3) + 1},${(step.lastMove%3) + 1}`;
-            if (move == history.length -1 ) {
+            if (move === history.length -1 ) {
                 moveData = <b>{moveData}</b>
             }
 
