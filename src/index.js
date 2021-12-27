@@ -57,6 +57,7 @@ class Game extends React.Component {
         this.state = {
             history: [{
                 squares: Array(9).fill(null),
+                lastMove: -1
             }],
             stepNumber: 0,
             xIsNext: true,
@@ -75,6 +76,7 @@ class Game extends React.Component {
         this.setState({
             history: history.concat([{
                 squares: squares,
+                lastMove: i,
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
@@ -98,10 +100,11 @@ class Game extends React.Component {
             const desc = move ?
                 'Go to move #' + move :
                 'Go to game start';
+
             return (
                 // We generally do not want to use indexes, as the list order can change. Here we do not change, so this is okay.
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <div>Move: {Math.floor(step.lastMove/3) + 1},{(step.lastMove%3) + 1}<button onClick={() => this.jumpTo(move)}>{desc}</button></div>
                 </li>
             );
         });
